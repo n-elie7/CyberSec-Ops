@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "=== STEP 3: VAULT OPERATIONS ==="
 
 vault_ops() {

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "==== STEP 1: VAULT SETUP ===="
 
 vault_setup() {

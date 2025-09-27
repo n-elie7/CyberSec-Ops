@@ -1,3 +1,5 @@
+#!/bin/bash
+
 echo "==== STEP 2: VAULT PERMISSIONS ===="
 
 update_permission() {
