@@ -56,3 +56,26 @@ vault_monitor() {
     echo "📊 Report saved to: $REPORT_FILE"
     echo "✅ Monitoring complete!"
 }
+
+# ============================================================================
+# MAIN EXECUTION
+# ============================================================================
+
+main() {
+    echo "Starting Secure Vault System Setup..."
+    echo "========================================"
+    echo ""
+    
+    # Execute all steps
+    vault_setup
+    vault_permissions  
+    vault_ops
+    vault_monitor
+    
+    echo ""
+    echo "Secure Vault System deployment complete!"
+    echo "All security measures have been implemented."
+}
+
+# Run the main function
+main
