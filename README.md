@@ -131,9 +131,9 @@ Run each step independently for testing or educational purposes:
 ### Access Control Matrix
 | Component | Owner | Group | Others | Security Level |
 |-----------|-------|-------|---------|----------------|
-| Keys      | RW    | -     | -       | Maximum        |
-| Secrets   | RW    | R     | -       | High           |
-| Logs      | RW    | R     | R       | Standard       |
+| Keys      | rw    | -     | -       | Maximum        |
+| Secrets   | rw    | r     | -       | High           |
+| Logs      | rw    | r     | r       | Standard       |
 
 ### Security Measures
 - ✅ **Principle of Least Privilege**: Minimal required permissions
