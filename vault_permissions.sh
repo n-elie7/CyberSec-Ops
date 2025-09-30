@@ -1,12 +1,22 @@
 #!/bin/bash
 
-echo "==== STEP 2: VAULT PERMISSIONS ===="
+echo "==== VAULT PERMISSIONS ===="
 
+VAULT_DIR="$HOME/secure_vault"
+
+# Check if secure_vault exists
+if [[ ! -d "$VAULT_DIR" ]]; then
+    echo "❌ ERROR: secure_vault directory does not exist!"
+    echo "Please run vault_setup.sh first."
+    exit 1
+fi
+
+# Function to update permissions
 update_permission() {
     local file="$1"
     local default_perm="$2"
     
-    echo "📄 Current permission for $file:"
+    echo "📄 Current permission for $(basename "$file"):"
     ls -l "$file"
     
     echo -n "Do you want to update the permission? (y/n/Enter for default): "
@@ -37,25 +47,13 @@ update_permission() {
     echo ""
 }
 
-vault_permissions() {
-    VAULT_DIR="$HOME/secure_vault"
-    
-    # Check if secure_vault exists
-    if [[ ! -d "$VAULT_DIR" ]]; then
-        echo "❌ ERROR: secure_vault directory does not exist!"
-        echo "Please run vault setup first."
-        return 1
-    fi
-    
-    echo "Managing vault permissions..."
-    echo ""
-    
-    # Update permissions for each file
-    update_permission "$VAULT_DIR/keys.txt" "600"
-    update_permission "$VAULT_DIR/secrets.txt" "640" 
-    update_permission "$VAULT_DIR/logs.txt" "644"
-    
-    echo "📋 Final file permissions:"
-    ls -l "$VAULT_DIR"
-    echo ""
-}
+echo "Managing vault permissions..."
+echo ""
+
+# Update permissions for each file
+update_permission "$VAULT_DIR/keys.txt" "600"
+update_permission "$VAULT_DIR/secrets.txt" "640" 
+update_permission "$VAULT_DIR/logs.txt" "644"
+
+echo "📋 Final file permissions:"
+ls -l "$VAULT_DIR"
