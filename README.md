@@ -1,15 +1,15 @@
 # CyberSec-Ops
 The Secure Vault Challenge
 
-# 🔐 Secure Vault System
+# Secure Vault System
 
 A comprehensive Linux-based security project designed for junior cybersecurity teams to learn file permissions, access control, and security monitoring fundamentals.
 
-## 📋 Project Overview
+## Project Overview
 
 The Secure Vault System is a shell-based application that demonstrates core cybersecurity principles through practical implementation. It creates a secure storage environment for sensitive data with proper access controls, monitoring capabilities, and operational security measures.
 
-## 🎯 Learning Objectives
+## Learning Objectives
 
 - **File System Security**: Understanding Linux file permissions and access control
 - **Data Protection**: Implementing secure storage for sensitive information
@@ -17,104 +17,164 @@ The Secure Vault System is a shell-based application that demonstrates core cybe
 - **Operational Security**: Safe handling of secrets and confidential data
 - **Shell Scripting**: Advanced bash programming for security applications
 
-## 🏗️ System Architecture
+## System Architecture
 
 ```
-secure_vault/
-├── keys.txt      # Encryption keys (600 permissions)
-├── secrets.txt   # Confidential data (640 permissions)  
-├── logs.txt      # System activity logs (644 permissions)
-└── vault_report.txt # Security monitoring reports
+secure-vault-system/
+├── vault_setup.sh          # Step 1: Initial vault creation
+├── vault_permissions.sh    # Step 2: Permission management
+├── vault_ops.sh            # Step 3: Operational interface
+├── vault_monitor.sh        # Step 4: Security monitoring
+└── README.md               # This file
+
+~/secure_vault/             # Created by scripts
+├── keys.txt                # Encryption keys (600 permissions)
+├── secrets.txt             # Confidential data (640 permissions)  
+├── logs.txt                # System activity logs (644 permissions)
+└── vault_report.txt        # Security monitoring reports
 ```
 
-## ⚙️ Components
+## Project Files
 
-### Step 1: Vault Setup (`vault_setup.sh`)
+### `vault_setup.sh` - Step 1: Vault Setup
 Creates the foundational vault structure with secure defaults.
 
 **Features:**
-- Automated directory and file creation
+- Automated directory and file creation in `~/secure_vault`
 - Welcome message initialization using I/O redirection
-- File listing verification
+- File listing verification with `ls -l`
 - Home directory integration
 
-### Step 2: Vault Permissions (`vault_permissions.sh`) 
+**Usage:**
+```bash
+./vault_setup.sh
+```
+
+---
+
+### `vault_permissions.sh` - Step 2: Vault Permissions
 Interactive permission management system for fine-grained access control.
 
 **Features:**
 - Pre-flight directory validation
-- Interactive permission configuration
-- Default security settings application
+- Interactive permission configuration for each file
+- Default security settings application:
+  - `keys.txt`: 600
+  - `secrets.txt`: 640
+  - `logs.txt`: 644
 - Permission verification display
 - Input validation and error handling
 
-### Step 3: Vault Operations (`vault_ops.sh`)
+**Usage:**
+```bash
+./vault_permissions.sh
+```
+
+---
+
+### `vault_ops.sh` - Step 3: Vault Operations
 Menu-driven operational interface for secure data management.
 
-**Features:**
-- **Add Secret**: Append new confidential data
-- **Update Secret**: Replace existing entries with pattern matching
-- **Add Log Entry**: Timestamped activity logging
-- **Access Keys**: Security barrier (always denied)
-- **Exit**: Clean session termination
+**Menu Options:**
+1. **Add Secret**: Append new confidential data to `secrets.txt`
+2. **Update Secret**: Replace existing entries using `sed -i`
+3. **Add Log Entry**: Add timestamped activity logs
+4. **Access Keys**: Security barrier (always returns "ACCESS DENIED 🚫")
+5. **Exit**: Clean session termination
 
-### Step 4: Vault Monitoring (`vault_monitor.sh`)
+**Usage:**
+```bash
+./vault_ops.sh
+```
+
+---
+
+### `vault_monitor.sh` - Step 4: Vault Monitoring
 Automated security assessment and reporting system.
 
 **Features:**
 - File metadata analysis (size, modification date, permissions)
-- Security risk detection for overprivileged files
-- Comprehensive report generation
+- Security risk detection for files with permissions more open than 644
+- Comprehensive report generation saved to `vault_report.txt`
 - Visual security status indicators
 
-## 🚀 Installation & Usage
+**Usage:**
+```bash
+./vault_monitor.sh
+```
+
+## Installation & Setup
 
 ### Prerequisites
 - Linux/Unix environment
 - Bash shell (version 4.0+)
 - Standard Unix utilities (`chmod`, `stat`, `sed`, `date`)
 
-### Quick Start
+### Installation Steps
 
-1. **Clone or download the project files:**
+1. **Create project directory and add script files:**
    ```bash
-   # If using git
-   git clone <repository-url>
+   mkdir secure-vault-system
    cd secure-vault-system
-   
-   # Or create the files manually
-   mkdir secure-vault-system && cd secure-vault-system
    ```
 
-2. **Make scripts executable:**
+2. **Create the four script files** with the provided code:
+   - `vault_setup.sh`
+   - `vault_permissions.sh`
+   - `vault_ops.sh`
+   - `vault_monitor.sh`
+
+3. **Make all scripts executable:**
    ```bash
-   chmod +x *.sh
+   chmod +x vault_setup.sh vault_permissions.sh vault_ops.sh vault_monitor.sh
    ```
 
-3. **Run the complete system:**
+4. **Verify installation:**
    ```bash
-   ./secure_vault_system.sh
+   ls -l *.sh
    ```
 
-### Individual Component Usage
+## Usage Workflow
 
-Run each step independently for testing or educational purposes:
+### Complete System Deployment
+
+Run the scripts in order for full system setup:
 
 ```bash
-# Step 1: Initial setup
+# Step 1: Create the vault structure
 ./vault_setup.sh
 
-# Step 2: Configure permissions
+# Step 2: Configure file permissions
 ./vault_permissions.sh
 
-# Step 3: Operational interface
+# Step 3: Perform vault operations
 ./vault_ops.sh
 
-# Step 4: Security monitoring
+# Step 4: Monitor security status
 ./vault_monitor.sh
 ```
 
-## 🔧 Configuration
+### Individual Script Usage
+
+Each script can be run independently after the initial setup:
+
+**Adding new secrets:**
+```bash
+./vault_ops.sh
+# Select option 1 from menu
+```
+
+**Checking security status:**
+```bash
+./vault_monitor.sh
+```
+
+**Reconfiguring permissions:**
+```bash
+./vault_permissions.sh
+```
+
+## Configuration
 
 ### Default File Permissions
 - `keys.txt`: **600** (owner read/write only)
@@ -143,9 +203,9 @@ Run each step independently for testing or educational purposes:
 - ✅ **Risk Monitoring**: Automated threat detection
 - ✅ **Input Validation**: Secure user interaction
 
-## 🔍 Monitoring & Reporting
+## Monitoring & Reporting
 
-The system generates detailed security reports including:
+The monitoring script generates detailed security reports including:
 - File integrity metrics
 - Permission analysis
 - Security risk assessments
@@ -164,7 +224,7 @@ Generated on: 2025-01-15 14:30:45
 ✅ No security risks detected - All file permissions are appropriate
 ```
 
-## 🚨 Security Considerations
+## Security Considerations
 
 ### Known Limitations
 - File contents stored in plaintext (educational purposes)
@@ -179,7 +239,7 @@ Generated on: 2025-01-15 14:30:45
 - Audit trail maintenance
 - Risk assessment automation
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -189,20 +249,28 @@ Generated on: 2025-01-15 14:30:45
 ./vault_setup.sh
 ```
 
-**Permission denied errors:**
+**Permission denied when running scripts:**
 ```bash
-# Check script executability
-ls -l *.sh
+# Make scripts executable
 chmod +x *.sh
 ```
 
-**Invalid permission format:**
+**Invalid permission format in vault_permissions.sh:**
 ```bash
 # Use 3-digit octal notation (e.g., 600, 755)
 # Valid range: 000-777
 ```
 
-## 🎓 Educational Value
+**Cannot find secure_vault directory:**
+```bash
+# Check if it was created in home directory
+ls -la ~/secure_vault
+
+# If not, run setup again
+./vault_setup.sh
+```
+
+## Educational Value
 
 This project demonstrates:
 - **Systems Administration**: File management and permissions
@@ -210,6 +278,14 @@ This project demonstrates:
 - **Risk Management**: Threat detection and assessment
 - **Operational Security**: Secure procedures and protocols
 - **Compliance**: Security standard adherence
+- **Modular Design**: Separation of concerns across multiple scripts
+
+## Project Submission
+
+When submitting this project, include:
+- ✅ All four script files (`vault_setup.sh`, `vault_permissions.sh`, `vault_ops.sh`, `vault_monitor.sh`)
+- ✅ This README.md file
+- ✅ A generated `vault_report.txt` as evidence of execution
 
 ## 📄 License
 
